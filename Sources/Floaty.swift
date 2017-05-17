@@ -205,6 +205,7 @@ open class Floaty: UIView {
     
     open var solidCircleColor: UIColor = UIColor.blue
     open var solidCircleRadius: CGFloat = 15.0
+    open var solidCircleZoomScale: CGFloat = 8
     
     open var solidCircleView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     open var cogButton: UIButton = UIButton(type: .custom)
@@ -332,25 +333,26 @@ open class Floaty: UIView {
         let dimension = solidCircleRadius * 2
         solidCircleView.layer.cornerRadius = solidCircleRadius
         solidCircleView.layer.backgroundColor = solidCircleColor.cgColor
-        solidCircleView.alpha = 0
         
         sView.insertSubview(solidCircleView, aboveSubview: overlayView)
-        
+
+        // must set frame before center, other wise center assume size is 0
         var f = solidCircleView.frame
         f.size = CGSize(width: dimension, height: dimension)
-        f.origin = CGPoint(x: sView.frame.width - f.width, y: sView.frame.height - f.height)
         solidCircleView.frame = f
+        
+        var c = CGPoint(x: 0, y: 0)
+        c.x = self.center.x - abs(self.bounds.width - self.size) / 2.0
+        c.y = self.center.y - abs(self.bounds.height - self.size) / 2.0
+        solidCircleView.center = c
+ 
         
         layer.shadowColor = UIColor.clear.cgColor
         UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: { // enlarge circle
-            self.solidCircleView.transform = CGAffineTransform(scaleX: 10, y: 10)
-            // animate alpha
-            self.solidCircleView.alpha = 1
+            self.solidCircleView.transform = CGAffineTransform(scaleX: self.solidCircleZoomScale, y: self.solidCircleZoomScale)
+        }) { (completed) in 
+            self.solidCircleView.transform = CGAffineTransform(scaleX: self.solidCircleZoomScale, y: self.solidCircleZoomScale)
             
-        }) { (completed) in
-            self.solidCircleView.transform = CGAffineTransform(scaleX: 10, y: 10)
-            // animate alpha
-            self.solidCircleView.alpha = 1
             self.superview?.isUserInteractionEnabled = true
         }
         
@@ -420,13 +422,8 @@ open class Floaty: UIView {
         // ac animate solid circle
         UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: { // enlarge circle
             self.solidCircleView.transform = CGAffineTransform(scaleX: 1, y: 1)
-            // animate alpha
-            self.solidCircleView.alpha = 0
-            
         }) { (completed) in
             self.solidCircleView.transform = CGAffineTransform(scaleX: 1, y: 1)
-            // animate alpha
-            self.solidCircleView.alpha = 0
             
             self.solidCircleView.removeFromSuperview()
             self.layer.shadowColor = UIColor.black.cgColor
