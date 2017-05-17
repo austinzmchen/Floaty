@@ -283,10 +283,10 @@ open class Floaty: UIView {
         Items open.
     */
     open func open() {
-        guard self.isUserInteractionEnabled else {
+        guard self.superview!.isUserInteractionEnabled else {
             return // prevent double clicking
         }
-        self.isUserInteractionEnabled = false
+        self.superview?.isUserInteractionEnabled = false
         
         if(items.count > 0){
             setOverlayView()
@@ -299,8 +299,10 @@ open class Floaty: UIView {
                 usingSpringWithDamping: 0.55,
                 initialSpringVelocity: 0.3,
                 options: UIViewAnimationOptions(), animations: { () -> Void in
-//                    self.plusLayer.transform = CATransform3DMakeRotation(self.degreesToRadians(self.rotationDegrees), 0.0, 0.0, 1.0)
-//                    self.buttonImageView.transform = CGAffineTransform(rotationAngle: self.degreesToRadians(self.rotationDegrees))
+                    /*
+                    self.plusLayer.transform = CATransform3DMakeRotation(self.degreesToRadians(self.rotationDegrees), 0.0, 0.0, 1.0)
+                    self.buttonImageView.transform = CGAffineTransform(rotationAngle: self.degreesToRadians(self.rotationDegrees))
+                    */
                     self.overlayView.alpha = 1
                 }, completion: {(f) -> Void in
                     self.overlayViewDidCompleteOpenAnimation = true
@@ -340,7 +342,7 @@ open class Floaty: UIView {
         solidCircleView.frame = f
         
         layer.shadowColor = UIColor.clear.cgColor
-        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: { // enlarge circle
+        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: { // enlarge circle
             self.solidCircleView.transform = CGAffineTransform(scaleX: 10, y: 10)
             // animate alpha
             self.solidCircleView.alpha = 1
@@ -349,7 +351,7 @@ open class Floaty: UIView {
             self.solidCircleView.transform = CGAffineTransform(scaleX: 10, y: 10)
             // animate alpha
             self.solidCircleView.alpha = 1
-            self.isUserInteractionEnabled = true
+            self.superview?.isUserInteractionEnabled = true
         }
         
         //
@@ -377,10 +379,10 @@ open class Floaty: UIView {
         Items close.
     */
     open func close() {
-        guard self.isUserInteractionEnabled else {
+        guard self.superview!.isUserInteractionEnabled else {
             return // prevent double clicking
         }
-        self.isUserInteractionEnabled = false
+        self.superview?.isUserInteractionEnabled = false
         
         if(items.count > 0){
             self.overlayView.removeTarget(self, action: #selector(close), for: UIControlEvents.touchUpInside)
@@ -388,8 +390,10 @@ open class Floaty: UIView {
                 usingSpringWithDamping: 0.6,
                 initialSpringVelocity: 0.8,
                 options: [], animations: { () -> Void in
-//                    self.plusLayer.transform = CATransform3DMakeRotation(self.degreesToRadians(0), 0.0, 0.0, 1.0)
-//                    self.buttonImageView.transform = CGAffineTransform(rotationAngle: self.degreesToRadians(0))
+                    /*
+                    self.plusLayer.transform = CATransform3DMakeRotation(self.degreesToRadians(0), 0.0, 0.0, 1.0)
+                    self.buttonImageView.transform = CGAffineTransform(rotationAngle: self.degreesToRadians(0))
+                    */
                     self.overlayView.alpha = 0
                 }, completion: {(f) -> Void in
                     if self.overlayViewDidCompleteOpenAnimation {
@@ -414,7 +418,7 @@ open class Floaty: UIView {
         }
         
         // ac animate solid circle
-        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: { // enlarge circle
+        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: { // enlarge circle
             self.solidCircleView.transform = CGAffineTransform(scaleX: 1, y: 1)
             // animate alpha
             self.solidCircleView.alpha = 0
@@ -426,7 +430,7 @@ open class Floaty: UIView {
             
             self.solidCircleView.removeFromSuperview()
             self.layer.shadowColor = UIColor.black.cgColor
-            self.isUserInteractionEnabled = true
+            self.superview?.isUserInteractionEnabled = true
         }
         
         UIView.animate(withDuration: 0.35, animations: {
