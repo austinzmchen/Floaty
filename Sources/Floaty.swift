@@ -369,6 +369,7 @@ open class Floaty: UIView {
                            initialSpringVelocity: 0.5,
                            options: .curveEaseIn, animations: { () -> Void in
                             self.solidCircleView.transform = .identity
+                            // animate alpha
                             self.solidCircleView.alpha = 0
                             self.overlayView.alpha = 0
                             
