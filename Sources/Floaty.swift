@@ -280,8 +280,8 @@ open class Floaty: UIView {
     }
 
     /**
-        Items open.
-    */
+     Items open.
+     */
     open func open() {
         
         guard let sView = self.superview
@@ -316,19 +316,19 @@ open class Floaty: UIView {
                             self.solidCircleView.alpha = 1
                             self.overlayView.alpha = 1
                             
-                            switch openAnimationType {
+                            switch self.openAnimationType {
                             case .pop:
-                                popAnimationWithOpen()
+                                self.popAnimationWithOpen()
                             case .fade:
-                                fadeAnimationWithOpen()
+                                self.fadeAnimationWithOpen()
                             case .slideLeft:
-                                slideLeftAnimationWithOpen()
+                                self.slideLeftAnimationWithOpen()
                             case .slideUp:
-                                slideUpAnimationWithOpen()
+                                self.slideUpAnimationWithOpen()
                             case .slideDown:
-                                slideDownAnimationWithOpen()
+                                self.slideDownAnimationWithOpen()
                             case .none:
-                                noneAnimationWithOpen()
+                                self.noneAnimationWithOpen()
                             }
             }, completion: {(f) -> Void in
                 self.overlayViewDidCompleteOpenAnimation = true
@@ -372,19 +372,19 @@ open class Floaty: UIView {
                             self.solidCircleView.alpha = 0
                             self.overlayView.alpha = 0
                             
-                            switch openAnimationType {
+                            switch self.openAnimationType {
                             case .pop:
-                                popAnimationWithClose()
+                                self.popAnimationWithClose()
                             case .fade:
-                                fadeAnimationWithClose()
+                                self.fadeAnimationWithClose()
                             case .slideLeft:
-                                slideLeftAnimationWithClose()
+                                self.slideLeftAnimationWithClose()
                             case .slideUp:
-                                slideUpAnimationWithClose()
+                                self.slideUpAnimationWithClose()
                             case .slideDown:
-                                slideDownAnimationWithClose()
+                                self.slideDownAnimationWithClose()
                             case .none:
-                                noneAnimationWithClose()
+                                self.noneAnimationWithClose()
                             }
             }, completion: {(f) -> Void in
                 if self.overlayViewDidCompleteOpenAnimation {
@@ -407,7 +407,6 @@ open class Floaty: UIView {
         fabDelegate?.floatyClosed?(self)
         closed = true
     }
-    
 
     /**
         Items open or close.
