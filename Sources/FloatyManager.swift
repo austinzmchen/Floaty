@@ -88,4 +88,12 @@ open class FloatyManager: NSObject {
             return floatyWindow.isHidden
         }
     }
+    
+    open func open(_ canOpen: Bool = true) {
+        if canOpen == false {
+            floatyController.floaty.close()
+        } else {
+            floatyController.floaty.open()
+        }
+    }
 }
