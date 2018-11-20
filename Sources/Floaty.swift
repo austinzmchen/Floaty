@@ -296,6 +296,7 @@ open class Floaty: UIView {
             overlayView.addTarget(self, action: #selector(close), for: UIControlEvents.touchUpInside)
 
             overlayViewDidCompleteOpenAnimation = false
+<<<<<<< Updated upstream
             UIView.animate(withDuration: 0.3, delay: 0,
                 usingSpringWithDamping: 0.55,
                 initialSpringVelocity: 0.3,
@@ -307,6 +308,34 @@ open class Floaty: UIView {
                     self.overlayView.alpha = 1
                 }, completion: {(f) -> Void in
                     self.overlayViewDidCompleteOpenAnimation = true
+=======
+            
+            UIView.animate(withDuration: 1.0, delay: 0,
+                           usingSpringWithDamping: 0.5,
+                           initialSpringVelocity: 0.5,
+                           options: UIViewAnimationOptions(), animations: { () -> Void in
+                self.solidCircleView.transform = CGAffineTransform(scaleX: 10, y: 10)
+                self.solidCircleView.alpha = 1
+                self.overlayView.alpha = 1
+                
+                switch self.openAnimationType {
+                case .pop:
+                    self.popAnimationWithOpen()
+                case .fade:
+                    self.fadeAnimationWithOpen()
+                case .slideLeft:
+                    self.slideLeftAnimationWithOpen()
+                case .slideUp:
+                    self.slideUpAnimationWithOpen()
+                case .slideDown:
+                    self.slideDownAnimationWithOpen()
+                case .none:
+                    self.noneAnimationWithOpen()
+                }
+            }, completion: {(f) -> Void in
+                self.overlayViewDidCompleteOpenAnimation = true
+                
+>>>>>>> Stashed changes
             })
 
 
@@ -388,6 +417,7 @@ open class Floaty: UIView {
         
         if(items.count > 0){
             self.overlayView.removeTarget(self, action: #selector(close), for: UIControlEvents.touchUpInside)
+<<<<<<< Updated upstream
             UIView.animate(withDuration: 0.3, delay: 0,
                 usingSpringWithDamping: 0.6,
                 initialSpringVelocity: 0.8,
@@ -401,6 +431,37 @@ open class Floaty: UIView {
                     if self.overlayViewDidCompleteOpenAnimation {
                         self.overlayView.removeFromSuperview()
                     }
+=======
+            UIView.animate(withDuration: 1.5, delay: 0,
+                           usingSpringWithDamping: 0.5,
+                           initialSpringVelocity: 0.5,
+                           options: .curveEaseIn, animations: { () -> Void in
+                self.solidCircleView.transform = .identity
+                // animate alpha
+                self.solidCircleView.alpha = 0
+                self.overlayView.alpha = 0
+                
+                switch self.openAnimationType {
+                case .pop:
+                    self.popAnimationWithClose()
+                case .fade:
+                    self.fadeAnimationWithClose()
+                case .slideLeft:
+                    self.slideLeftAnimationWithClose()
+                case .slideUp:
+                    self.slideUpAnimationWithClose()
+                case .slideDown:
+                    self.slideDownAnimationWithClose()
+                case .none:
+                    self.noneAnimationWithClose()
+                }
+            }, completion: {(f) -> Void in
+                if self.overlayViewDidCompleteOpenAnimation {
+                    self.solidCircleView.alpha = 0
+                    self.overlayView.removeFromSuperview()
+                    self.solidCircleView.removeFromSuperview()
+                }
+>>>>>>> Stashed changes
             })
 
             switch openAnimationType {

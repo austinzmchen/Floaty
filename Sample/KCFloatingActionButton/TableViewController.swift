@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewController: UITableViewController, FloatyDelegate {
+class TableViewController: UITableViewController {
     
     var floaty = FloatyManager.defaultInstance()
     
@@ -67,24 +67,26 @@ class TableViewController: UITableViewController, FloatyDelegate {
         
         fab.fabDelegate = self
         
+        /*
+        let item = FloatyItem()
+        item.buttonColor = UIColor.blue
+        item.circleShadowColor = UIColor.red
+        item.titleShadowColor = UIColor.blue
+        item.title = "Custom item"
+        item.handler = { item in
+        }
         
-//        let item = FloatyItem()
-//        item.buttonColor = UIColor.blue
-//        item.circleShadowColor = UIColor.red
-//        item.titleShadowColor = UIColor.blue
-//        item.title = "Custom item"
-//        item.handler = { item in
-//        }
-//        
-//        fab.addItem(title: "I got a title")
-//        fab.addItem("I got a icon", icon: UIImage(named: "icShare"))
-//        fab.addItem("I got a handler", icon: UIImage(named: "icMap")) { item in
-//            let alert = UIAlertController(title: "Hey", message: "I'm hungry...", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Me too", style: .default, handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-//            self.fab.close()
-//        }
-//        fab.addItem(item: item)
+        fab.addItem(title: "I got a title")
+        fab.addItem("I got a icon", icon: UIImage(named: "icShare"))
+        fab.addItem("I got a handler", icon: UIImage(named: "icMap")) { item in
+            let alert = UIAlertController(title: "Hey", message: "I'm hungry...", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Me too", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            self.fab.close()
+        }
+        fab.addItem(item: item)
+         */
+        
         fab.sticky = true
         
         fab.fabDelegate = self
@@ -103,6 +105,10 @@ class TableViewController: UITableViewController, FloatyDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TestCell", for: indexPath)
         return cell
     }
+}
+
+extension TableViewController: FloatyDelegate {
+    
     // MARK: - Floaty Delegate Methods
     func floatyOpened(_ floaty: Floaty) {
         print("Floaty Opened")
