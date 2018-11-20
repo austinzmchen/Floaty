@@ -296,19 +296,6 @@ open class Floaty: UIView {
             overlayView.addTarget(self, action: #selector(close), for: UIControlEvents.touchUpInside)
 
             overlayViewDidCompleteOpenAnimation = false
-<<<<<<< Updated upstream
-            UIView.animate(withDuration: 0.3, delay: 0,
-                usingSpringWithDamping: 0.55,
-                initialSpringVelocity: 0.3,
-                options: UIViewAnimationOptions(), animations: { () -> Void in
-                    /*
-                    self.plusLayer.transform = CATransform3DMakeRotation(self.degreesToRadians(self.rotationDegrees), 0.0, 0.0, 1.0)
-                    self.buttonImageView.transform = CGAffineTransform(rotationAngle: self.degreesToRadians(self.rotationDegrees))
-                    */
-                    self.overlayView.alpha = 1
-                }, completion: {(f) -> Void in
-                    self.overlayViewDidCompleteOpenAnimation = true
-=======
             
             UIView.animate(withDuration: 1.0, delay: 0,
                            usingSpringWithDamping: 0.5,
@@ -334,8 +321,6 @@ open class Floaty: UIView {
                 }
             }, completion: {(f) -> Void in
                 self.overlayViewDidCompleteOpenAnimation = true
-                
->>>>>>> Stashed changes
             })
 
 
@@ -417,21 +402,6 @@ open class Floaty: UIView {
         
         if(items.count > 0){
             self.overlayView.removeTarget(self, action: #selector(close), for: UIControlEvents.touchUpInside)
-<<<<<<< Updated upstream
-            UIView.animate(withDuration: 0.3, delay: 0,
-                usingSpringWithDamping: 0.6,
-                initialSpringVelocity: 0.8,
-                options: [], animations: { () -> Void in
-                    /*
-                    self.plusLayer.transform = CATransform3DMakeRotation(self.degreesToRadians(0), 0.0, 0.0, 1.0)
-                    self.buttonImageView.transform = CGAffineTransform(rotationAngle: self.degreesToRadians(0))
-                    */
-                    self.overlayView.alpha = 0
-                }, completion: {(f) -> Void in
-                    if self.overlayViewDidCompleteOpenAnimation {
-                        self.overlayView.removeFromSuperview()
-                    }
-=======
             UIView.animate(withDuration: 1.5, delay: 0,
                            usingSpringWithDamping: 0.5,
                            initialSpringVelocity: 0.5,
@@ -461,7 +431,6 @@ open class Floaty: UIView {
                     self.overlayView.removeFromSuperview()
                     self.solidCircleView.removeFromSuperview()
                 }
->>>>>>> Stashed changes
             })
 
             switch openAnimationType {
